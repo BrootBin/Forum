@@ -1,0 +1,65 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+{% block title %}Forum{% endblock %}
+{% block content %}
+<main class="main-container-index">
+    <aside class="sidebar">
+        <h2>Категорії</h2>
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a 
+                        href="{% url 'posts_by_category' category.id %}" 
+                        {% if selected_category and selected_category.id == category.id %}
+                        class="active-category"{% endif %}
+                    >
+                        {{ category.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+    
+    
+    <section class="posts">
+        <h2>Останні публікації</h2>
+        {% for post in posts %}
+        <div class="post-card">
+            <div class="vote-box">
+                <span class="vote-up" onclick="vote({{ post.id }}, 'up')">↑</span>
+                <span class="vote-count" id="score-{{ post.id }}">{{ post.vote_score }}</span>
+                <span class="vote-down" onclick="vote({{ post.id }}, 'down')">↓</span>
+            </div>
+            <div class="post-content">
+                <h3><a href="{% url 'post_detail' post.id %}" class="no-underline">{{ post.title }}</a></h3>
+                <p class="meta">
+                    <img src="{% static 'image/message.png' %}" width="10" height="10" alt="Коментарі">
+                    Автор: {{ post.author.username }} – {{ post.created_at|timesince }} тому
+                </p>
+                <p>{{ post.body|truncatechars:100 }}</p>
+                {% if post.comments.last %}
+                    <p class="last-comment"><strong>Останній коментар:</strong> {{ post.comments.last.body|truncatechars:50 }}</p>
+                {% endif %}
+            </div>
+        </div>        
+        {% endfor %}
+    </section>
+</main>
+<script>
+    function vote(postId, direction) {
+        fetch(`/vote/${postId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `direction=${direction}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(`score-${postId}`).innerText = data.score;
+        });
+    }
+</script>
+    
+{% endblock %}

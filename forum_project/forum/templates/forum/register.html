@@ -1,0 +1,16 @@
+{% extends 'forum/base.html' %}
+{% block title %}Реєстрація{% endblock %}
+
+{% block content %}
+<div class="form-box">
+    <h2>Реєстрація</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зареєструватися</button>
+    </form>
+    <p class="login-link">
+        Вже є акаунт? <a href="{% url 'login' %}">Увійти</a>
+    </p>
+</div>
+{% endblock %}
