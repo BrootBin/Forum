@@ -79,8 +79,11 @@ DATABASES = {
         'NAME': 'forum_s29t',
         'USER': 'forum_s29t_user',
         'PASSWORD': '2mxQH77S1p9YbvKxJL92Wkdc8B6Pepl0',
-        'HOST': 'dpg-d13dttc9c44c7397hkm0-a.pg.render.com',
+        'HOST': 'dpg-d13dttc9c44c7397hkm0-a.oregon-postgres.render.com',
         'PORT': '5432',
+		'OPTIONS':{
+            'sslmode': 'require',
+        }, 
     }
 }
 
