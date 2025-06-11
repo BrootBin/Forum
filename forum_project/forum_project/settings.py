@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,16 +77,17 @@ WSGI_APPLICATION = 'forum_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'forum_s29t',
-        'USER': 'forum_s29t_user',
-        'PASSWORD': '2mxQH77S1p9YbvKxJL92Wkdc8B6Pepl0',
-        'HOST': 'dpg-d13dttc9c44c7397hkm0-a.oregon-postgres.render.com',
-        'PORT': '5432',
-		'OPTIONS':{
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'OPTIONS': {
             'sslmode': 'require',
-        }, 
+        },
     }
 }
+
 
 
 
