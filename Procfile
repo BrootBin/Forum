@@ -1,2 +1,2 @@
-cd forum_project && gunicorn forum_project.wsgi
+web: gunicorn forum_project.wsgi
 
