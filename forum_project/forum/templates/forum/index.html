@@ -2,23 +2,35 @@
 {% load static %}
 {% block title %}Forum{% endblock %}
 {% block content %}
-<main class="main-container-index">
-    <aside class="sidebar">
-        <h2>Категорії</h2>
-        <ul>
-            {% for category in categories %}
-                <li>
-                    <a 
-                        href="{% url 'posts_by_category' category.id %}" 
-                        {% if selected_category and selected_category.id == category.id %}
-                        class="active-category"{% endif %}
-                    >
-                        {{ category.name }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </aside>
+<div class="main-container-index">
+    <div class="left-column">
+        <aside class="sidebar">
+            <h2>Категорії</h2>
+            <ul>
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'posts_by_category' category.id %}"
+                           {% if selected_category and selected_category.id == category.id %}
+                           class="active-category"
+                           {% endif %}>
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <div class="donatebar">
+            <a href="#" class="donate-link">
+                <img src="{% static 'image/donate.png' %}" alt="Підтримати форум" class="donate-icon">
+                <span class="donate-text">Підтримати<br>форум</span>
+            </a>
+        </div>
+    </div>
+
+
+
+
     
     
     <section class="posts">
