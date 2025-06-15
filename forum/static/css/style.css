@@ -129,7 +129,7 @@ nav a:hover {
 .posts {
 	flex: 1;
 }
-.donatebar{
+.donatebar a{
 	display:inline-block;
 	padding: 12px 24px; 
 	background-color: #ffffff; 
