@@ -126,7 +126,7 @@ nav a:hover {
 	transform: scale(1.2);
 	color: #3a3aad;
 }
-.donatebar{
+.bmc-btn{
 	box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.15);
 }
 .posts {
