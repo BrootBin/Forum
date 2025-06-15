@@ -129,7 +129,18 @@ nav a:hover {
 .posts {
 	flex: 1;
 }
-
+.donatebar{
+	display:inline-block;
+	padding: 12px 24px; 
+	background-color: #ffffff; 
+	color: #000; 
+   font-family: 'Inter', sans-serif; 
+	font-size: 20px; 
+	text-decoration: none; 
+   border: 2px solid #000; 
+	border-radius: 10px; 
+   box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.15);
+}
 .post-card {
 	background: #fff;
 	border-radius: 12px;
