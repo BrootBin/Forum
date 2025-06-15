@@ -131,13 +131,15 @@ nav a:hover {
 }
 .donatebar a{
 	display:inline-block;
-	padding: 12px 24px; 
+	width: 220px;
+	height: 65px;
+	align-content: center; 
+	text-align: center;
 	background-color: #ffffff; 
 	color: #000; 
    font-family: 'Inter', sans-serif; 
 	font-size: 20px; 
-	text-decoration: none; 
-   border: 2px solid #000; 
+	text-decoration: none;  
 	border-radius: 10px; 
    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.15);
 }
