@@ -1,0 +1,48 @@
+
+/* Хедер */
+header {
+	background-color: #ffffff;
+	border-bottom: 1px solid #ddd;
+	padding: 1rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: 1rem;
+	flex-shrink: 0;
+}
+
+header h1 {
+	font-size: 1.6rem;
+	color: #5a5acb;
+	margin: 0;
+	flex: 1 1 auto;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 1rem;
+	white-space: nowrap;
+}
+
+nav a {
+	padding: 0.5rem 1rem;
+	background-color: transparent;
+	border: 2px solid transparent;
+	border-radius: 6px;
+	text-decoration: none;
+	color: #5a5acb;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	min-width: 80px;
+	text-align: center;
+}
+
+nav a:hover {
+	background-color: #f0f0ff;
+	border-color: #5a5acb;
+	color: #3a3aad;
+}
