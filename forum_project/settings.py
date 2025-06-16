@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 	'cloudinary',
     'cloudinary_storage',
 	'sass_processor',
+	'compressor',
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
