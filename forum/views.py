@@ -76,7 +76,7 @@ def logout_view(request):
 @login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -84,7 +84,15 @@ def create_post(request):
             return redirect('index')
     else:
         form = PostForm()
-    return render(request, 'forum/create_post.html', {'form': form})
+        form.fields.pop('image', None)
+
+    return render(request, 'forum/create_post.html', {
+        'form': form,
+        'disable_upload_button': True,
+    })
+
+
+
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
