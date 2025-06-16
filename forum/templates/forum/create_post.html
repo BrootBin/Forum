@@ -4,8 +4,27 @@
 <div class="form-box">
     <h2>Створи нову тему!</h2>
         <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <div class="form-box">
+                <h2>Створи нову тему!</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+        
+                {{ form.title }}
+                {{ form.content }}
+                {{ form.category }}
+
+                <p>
+                    {{ form.image.label_tag }}
+                    {{ form.image.as_widget(attrs={
+                    'disabled': 'disabled',
+                    'title': 'Скоро з’явиться!'
+                    }) }}
+                </p>
+
+        <button type="submit">Створити</button>
+    </form>
+</div>
+
             <!--У розробці-->
             <button type="submit">Створити</button>
         </form>
