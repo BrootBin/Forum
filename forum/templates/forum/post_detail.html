@@ -12,7 +12,12 @@
             <p class="meta">Автор: {{ post.author.username }} • {{ post.created_at|date:"d.m.Y H:i" }}</p>
         </div>
         <div class="post-body">
-            <p>{{ post.body }}</p>
+            {% if post.image %}
+                <div class="post-image-box">
+                    <img src="{{ post.image.url }}" alt="Зображення поста">
+                </div>
+            {% endif %}
+            <p>{{ post.content|linebreaks }}</p>
         </div>
     </div>
 

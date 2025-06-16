@@ -1,11 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
+from django.core.exceptions import ValidationError
+import os
+
+def validate_image(image):
+    megabyte_limit = 2
+    if image.size > megabyte_limit * 1024 * 1024:
+        raise ValidationError(f"Максимальний розмір зображення — {megabyte_limit}MB")
+
+    valid_extensions = ['.jpg', '.jpeg', '.png']
+    ext = os.path.splitext(image.name)[1].lower()
+    if ext not in valid_extensions:
+        raise ValidationError("Дозволені формати: JPEG або PNG")
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
@@ -15,6 +29,15 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+
+    image = models.ImageField(
+        upload_to='post_images/',  
+        null=True,
+        blank=True,
+        validators=[validate_image],
+        verbose_name="Зображення"
+    )
+
 
     def __str__(self):
         return self.title

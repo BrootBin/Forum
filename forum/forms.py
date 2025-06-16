@@ -6,7 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category']
+        fields = ['title', 'content', 'category', 'image']
+
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)

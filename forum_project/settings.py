@@ -44,7 +44,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'forum',
     'django.contrib.staticfiles',
+	'cloudinary',
+    'cloudinary_storage',
+	'sass_processor',
 ]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,6 +141,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+STATICFILES_FINDERS += [
+    'sass_processor.finders.CssFinder',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -143,6 +163,8 @@ LOGIN_URL = '/login/'
 STATICFILES_DIRS = [
     BASE_DIR / "forum" / "static",
 ]
+
+
 
 # Безпека ресурсу
 SECURE_SSL_REDIRECT = True
