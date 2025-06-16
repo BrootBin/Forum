@@ -8,6 +8,7 @@ django-cloudinary-storage==0.3.0
 django-sass-processor==1.4.1
 gunicorn==23.0.0
 idna==3.10
+libsass==0.23.0
 packaging==25.0
 pillow==11.2.1
 psycopg2==2.9.10
