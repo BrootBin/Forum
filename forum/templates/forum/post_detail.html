@@ -10,18 +10,18 @@
         <div class="post-header">
             <h2 class="post-title-centered">{{ post.title }}</h2>
             <p class="meta">Автор: {{ post.author.username }} • {{ post.created_at|date:"d.m.Y H:i" }}</p>
-    </div>
-            <div class="post-body">
-                {% if post.image %}
-                    <div class="post-image-box">
-                        <img src="{{ post.image.url }}" alt="Зображення поста">
-                 </div>
-                {% endif %}
-                <div class="post-content-text">
-                    <p>{{ post.content|linebreaks }}</p>
+        </div>
+        <div class="post-body">
+            {% if post.image %}
+                <div class="post-image-box">
+                    <img src="{{ post.image.url }}" alt="Зображення поста">
                 </div>
+            {% endif %}
+            <div class="post-content-text">
+                <p>{{ post.content|linebreaks }}</p>
             </div>
         </div>
+    </div>
 
 
     <!-- Блок коментарів + форма -->
