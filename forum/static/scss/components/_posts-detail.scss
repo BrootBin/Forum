@@ -18,6 +18,7 @@
 	margin: 0;
 	font-size: 1.8rem;
 	font-weight: 700;
+	text-align: center;
 }
 
 .meta {
@@ -125,4 +126,10 @@
 
 .post-content-text {
     margin-top: 1rem;
+}
+.post-title {
+	text-align: center;
+	margin-bottom: 1rem;
+	font-size: 2rem;
+	font-weight: bold;
 }
