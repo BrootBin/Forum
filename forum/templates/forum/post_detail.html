@@ -33,7 +33,7 @@
                 <p>{{ comment.body }}</p>
             </div>
         {% empty %}
-            <p>Немає коментарів. Будьте першим!</p>
+            <p class="empty-comment">Немає коментарів. Будьте першим!</p>
         {% endfor %}
 
         {% if user.is_authenticated %}
