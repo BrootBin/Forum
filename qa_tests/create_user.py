@@ -12,7 +12,7 @@ try:
     driver.get("https://forum-production-c592.up.railway.app/register/")
 
     username = f"testuser{random.randint(1000,9999)}"
-    password = "TestPassword123"
+    password = f"TestPassword{random.randint(1000,9999)}"
 
     username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
     email_input = driver.find_element(By.NAME, "email")
@@ -33,6 +33,7 @@ try:
     expected_url = "https://forum-production-c592.up.railway.app/"
 
     print(f"Користувача створено: {username}")
+    print(f"Пароль: {password}")
 
 except Exception as e:
     print(f"Помилка під час реєстрації: {e}")
