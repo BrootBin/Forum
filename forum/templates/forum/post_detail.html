@@ -26,7 +26,7 @@
 
     <!-- Блок коментарів + форма -->
     <div class="comments-section full-width-header">
-        <h3>Коментарі</h3>
+        <h3 class="comments-section-title">Коментарі</h3>
         {% for comment in comments %}
             <div class="comment-box">
                 <p class="meta"><strong>{{ comment.author.username }}</strong> — {{ comment.created_at|timesince }} тому</p>

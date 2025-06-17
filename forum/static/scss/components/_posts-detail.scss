@@ -6,6 +6,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+	font-size: 1rem;
 }
 .main-container-post .post-card {
 	background: #fff;
@@ -24,8 +25,14 @@
 	padding: 1.5rem;
 	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.15);
 }
-
-.post-header h2, p {
+.comments-section-title{
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	text-align: center;
+	color: #333;
+}
+.post-header h2 {
 	margin: 0;
 	font-size: 1.8rem;
 	font-weight: 700;
@@ -34,6 +41,7 @@
 .post-content h3 {
 	margin: 0;
 	font-size: 1.2rem;
+	text-align: center;
 }
 
 .meta {
