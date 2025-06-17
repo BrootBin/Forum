@@ -14,7 +14,7 @@
         <div class="post-body">
             {% if post.image %}
                 <div class="post-image-box">
-                    <img src="{{ post.image.url }}" alt="Зображення поста">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 </div>
             {% endif %}
             <div class="post-content-text">

@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from cloudinary.models import CloudinaryField
+import os
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-
-from django.core.exceptions import ValidationError
-import os
 
 def validate_image(image):
     megabyte_limit = 2
@@ -30,13 +29,12 @@ class Post(models.Model):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
 
-    image = models.ImageField(
-        upload_to='post_images/',  
-        null=True,
-        blank=True,
-        validators=[validate_image],
-        verbose_name="Зображення"
+    image = CloudinaryField(
+    'image',
+    null=True,
+    blank=True
     )
+
 
 
     def __str__(self):
