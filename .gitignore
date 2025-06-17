@@ -2,3 +2,4 @@
 venv/
 .env
 main.css
+staticfiles
