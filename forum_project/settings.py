@@ -13,6 +13,7 @@ import os
 import dj_database_url
 from decouple import config
 from pathlib import Path
+import cloudinary
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +31,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
 
 
@@ -44,19 +45,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'forum',
     'django.contrib.staticfiles',
-	'cloudinary',
+    'cloudinary',
     'cloudinary_storage',
 	'sass_processor',
 	'compressor',
 ]
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET')
+)
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,7 +102,7 @@ WSGI_APPLICATION = 'forum_project.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config("DATABASE_URL"),  # тут заміна
+        default=config("DATABASE_URL"),
         conn_max_age=600
     )
 }
@@ -169,7 +177,7 @@ STATICFILES_DIRS = [
 
 # Безпека ресурсу
 SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#ECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True 
 CSRF_COOKIE_SECURE = True
 
@@ -179,5 +187,6 @@ SECURE_HSTS_PRELOAD = True
 
 
 # Для клауду
+
 SASS_PROCESSOR_ENABLED = True
 SASS_PROCESSOR_ROOT = BASE_DIR / "forum" / "static"

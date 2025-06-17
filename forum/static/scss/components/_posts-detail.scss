@@ -71,7 +71,7 @@
 }
 
 .post-image-box img {
-	max-width: 100%;
+	max-width: 70%;
 	height: auto;
 	border-radius: 12px;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
@@ -80,7 +80,7 @@
 }
 
 .post-image-box img:hover {
-	transform: scale(1.05);
+	transform: scale(1.5);
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
 }
 
