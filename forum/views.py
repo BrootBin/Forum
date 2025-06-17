@@ -10,8 +10,9 @@ from django.http import HttpResponseForbidden
 from ratelimit.decorators import ratelimit
 
 
-@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
+@ratelimit(key='ip', rate='10/m', method='GET, POST', block=True)
 @login_required
+@require_POST
 def vote_post(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
@@ -36,7 +37,7 @@ def vote_post(request, post_id):
 
     return JsonResponse({"score": score})
 
-@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
+@ratelimit(key='ip', rate='10/m', method='GET, POST', block=True)
 def index(request):
     posts = Post.objects.all().order_by('-created_at')
     categories = Category.objects.all()
@@ -86,16 +87,12 @@ def logout_view(request):
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            print("FILES:", request.FILES)
-            print("IMAGE FIELD:", form.cleaned_data.get('image'))
             print("FILES:", request.FILES)
             print("IMAGE FIELD:", form.cleaned_data.get('image'))
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-        return redirect('post_detail', post_id=post.pk)
         return redirect('post_detail', post_id=post.pk)
     else:
         form = PostForm()
@@ -103,7 +100,7 @@ def create_post(request):
 
 
 
-@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
+@ratelimit(key='ip', rate='10/m', method='GET, POST', block=True)
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = post.comments.order_by('-created_at')
