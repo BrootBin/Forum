@@ -6,7 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Post, Category, Vote
 from .forms import UserRegistrationForm, PostForm, CommentForm
+from django.http import HttpResponseForbidden
+from ratelimit.decorators import ratelimit
 
+
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 @login_required
 def vote_post(request, post_id):
     try:
@@ -32,11 +36,13 @@ def vote_post(request, post_id):
 
     return JsonResponse({"score": score})
 
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def index(request):
     posts = Post.objects.all().order_by('-created_at')
     categories = Category.objects.all()
     return render(request, 'forum/index.html', {'posts': posts, 'categories': categories})
 
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def posts_by_category(request, category_id):
     category = Category.objects.get(id=category_id)
     posts = Post.objects.filter(category=category).order_by('-created_at')
@@ -47,6 +53,7 @@ def posts_by_category(request, category_id):
         'selected_category': category
     })
 
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def register_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -58,6 +65,7 @@ def register_view(request):
         form = UserRegistrationForm()
     return render(request, 'forum/register.html', {'form': form})
 
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -68,11 +76,12 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'forum/login.html', {'form': form})
-
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def logout_view(request):
     logout(request)
     return redirect('login')
 
+@ratelimit(key='ip', rate='10/m', method='GET, POST', block=True)
 @login_required
 def create_post(request):
     if request.method == 'POST':
@@ -89,7 +98,7 @@ def create_post(request):
     return render(request, 'forum/create_post.html', {'form': form})
 
 
-
+@ratelimit(key='ip', rate='20/m', method='GET, POST', block=True)
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = post.comments.order_by('-created_at')
