@@ -91,9 +91,6 @@ def create_post(request):
         'disable_upload_button': True,
     })
 
-
-
-
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = post.comments.order_by('-created_at')
